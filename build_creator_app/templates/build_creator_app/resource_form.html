@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Calculator</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Resource Calculator</h1>
+    <form method="post" style="text-align: center;">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Wood</th>
+                    <th>Food</th>
+                    <th>Gold</th>
+                    <th>Stone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{ form.wood }}</th>
+                    <th>{{ form.food }}</th>
+                    <th>{{ form.gold }}</th>
+                    <th>{{ form.stone }}</th>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Calculate</button>
+    </form>
+    {% if resources is not None %}
+        <p style="text-align: center;">Resources per minute:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Wood</th>
+                    <th>Food</th>
+                    <th>Gold</th>
+                    <th>Stone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{resources.total_wood}}</th>
+                    <th>{{resources.total_food}}</th>
+                    <th>{{resources.total_gold}}</th>
+                    <th>{{resources.total_stone}}</th>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="text-align:center;">This amount allows you to maintain the production per minute of one of the following:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Militia</th>
+                    <th>Archers</th>
+                    <th>Scouts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{troops.militia}}</th>
+                    <th>{{troops.archer}}</th>
+                    <th>{{troops.scout}}</th>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
